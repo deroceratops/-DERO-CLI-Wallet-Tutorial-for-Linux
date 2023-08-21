@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li {
+      margin-bottom: 1.4em;
+    }
+
+    code {
+      background-color: #111111;
+      color: aliceblue;
+      padding: 0.8em;
+      display: block;
+      margin: 1em 0 1.4em;
+      border-radius: 4px;
+      overflow: scroll;
+    }
+
+    body {
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 0.4em 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DERO CLI Wallet Tutorial for Linux</h1>
+  </header>
+  <h2>About</h2>
+  <p>The DERO CLI Wallet is currently much more stable and have more features than the Engram GUI wallet.</p>
+  <p>The purpose of this guide is to show how the CLI wallet can be used on Linux.</p>
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>Have Linux installed on your computer.</li>
+    <li>Have basic familiarity with the terminal.</li>
+  </ul>
+  <h2>Installing the wallet CLI</h2>
+  <ol>
+    <li>Open a terminal window. It's usually done by pressing CTRL + ALT + T.</li>
+    <li>Go to your home directory using the terminal. Enter this command  in the terminal to go there.
+      <code>cd</code>
+    </li>
+    <li>Download the tar file containing the wallet executable. The URL is from <a href="https://github.com/deroproject/derohe/releases" target="_blank" rel="noopener noreferrer">the DERO Projects' official GitGub</a>.</li>
+
+      <code>wget https://github.com/deroproject/derohe/releases/latest/download/dero_linux_amd64.tar.gz</code>
+    <li>
+      Decompress the tar file. You will get a new directory called dero_linux_amd64.
+      <code>
+        tar -xvzf dero_linux_amd64.tar.gz
+      </code>
+    </li>
+    <li>
+      Enter the new directory.
+      <code>cd dero_linux_amd64</code>
+    </li>
+    <li>Start the wallet CLI.
+      <code>./dero-wallet-cli-linux-amd64 --remote</code>
+      You can optionally start it like this. It will also work if you are not in the wallet directory.
+      <code>/home/$USER/dero_linux_amd64/dero-wallet-cli-linux-amd64 --remote
+      </code>
+    </li>
+    <li>
+      You will get output similar to this.
+      <pre><code>21/08 10:08:11  INFO    wallet  DERO Wallet  :  It is an alpha version, use it for testing/evaluations purpose only.
+21/08 10:08:11  INFO    wallet  Copyright 2017-2021 DERO Project. All rights reserved.
+21/08 10:08:11  INFO    wallet          {"OS": "linux", "ARCH": "amd64", "GOMAXPROCS": 8}
+21/08 10:08:11  INFO    wallet          {"Version": "3.5.3-117.DEROHE.STARGATE+18032023"}
+21/08 10:08:11  INFO    wallet          {"MODE": "mainnet"}
+Menu:
+        1       Open existing Wallet
+        2       Create New Wallet
+        3       Recover Wallet using recovery seed (25 words)
+        4       Recover Wallet using recovery key (64 char private spend key hex)
+
+        9       Exit menu and start prompt
+        0       Exit Wallet</code>
+    </pre>
+    </li>
+  </ol>
+  <h2>Create new wallet</h2>
+  <ol>
+    <li>
+      Go to your DERO wallet directory.
+      <code>cd /home/$USER/dero_linux_amd64</code>
+    </li>
+    <li>Start the wallet CLI.
+      <code>./dero-wallet-cli-linux-amd64 --remote</code>
+    </li>
+    <li>In the menu type 2 for "Create New Wallet", then press ENTER.</li>
+    <li>Type the filename you want (it's recommended to name it with .db as file extension, for example doe.db.) or leave blank to use the default filename, wallet.db. Then press ENTER.</li>
+    <li>Choose a strong password and store it somewhere safe. Confirm your password.</li>
+    <li>Press ENTER to get a seed with english words or choose another language.</li>
+    <li>You will get 25 words. Write them down and store them in a safe place.</li>
+    <li>Register your wallet by selecting number 4 in the menu, "Account registration to blockchain".</li>
+    <li>Be patient and wait while your wallet is being registered.</li>
+    <li>After registering you should see some new options in the menu.</li>
+    <li>Show your address by selecting 1, "Display account Address" in the menu. The address is the long string beginning with "dero".</li>
+    <li>You can verify that everything is working and you have the correct address by sending a small amount of DERO to your wallet. Be aware that it might take several minutes or more to withdraw DERO from an exchange.</li>
+  </ol>
+  <h2>Open a specific wallet if you have several wallets</h2>
+  <p>If you have a wallet with the default name, wallet.db you will be prompted to enter it's password every time you start the CLI.</p>
+  <p>If you would like to open another wallet follow these steps.</p>
+  <ol>
+    <li>
+      Go to your DERO wallet directory.
+      <code>cd /home/$USER/dero_linux_amd64</code>
+    </li>
+    <li>
+      List the wallet files in the directory.
+      <code>ls *.db</code>
+    </li>
+    <li>Take note of the filename of the wallet you would like to open.</li>
+    <li>Start the wallet CLI.
+      <code>./dero-wallet-cli-linux-amd64 --remote</code>
+    </li>
+    <li>If you have a wallet named wallet.db, you will be asked for it's password. Enter it. Otherwise go to step 7.</li>
+    <li>Select 8, "Close Wallet".</li>
+    <li>Select 1, "Open Existing Wallet".</li>
+    <li>Enter the filename for the wallet you wish to open.</li>
+    <li>Enter the wallet's password.</li>
+  </ol>
+  <h2>Recover wallet using recovery seed</h2>
+  <ol>
+    <li>
+      Go to your DERO wallet directory.
+      <code>cd /home/$USER/dero_linux_amd64</code>
+    </li>
+    <li>Start the wallet CLI.
+      <code>./dero-wallet-cli-linux-amd64 --remote</code>
+    </li>
+    <li>Select 3, "Recover Wallet using recovery seed (25 words)".</li>
+    <li>Enter the filename you want to use for the wallet. It's recommended to name it with .db as file extension, for example doe.db.</li>
+    <li>Enter the password you would like to use to unlock the wallet and confirm.</li>
+    <li>Enter your 25 word seed phrase.</li>
+    <li>You should now get a message saying "Successfully recovered wallet from seed".</li>
+  </ol>
+  <hr>
+  <footer>
+    <p>Last updated by DD 2023-08-21.</p>
+    <p>If this tutorial is valuable to you, please consider supporting by sending some DERO to dero1qy8yn7u67fx3stcpnkfah3mq7h45k4zhfaa9uwhgde5vpwty6r04xqg6mqgy2</p>
+  </footer>
+</body>
+</html>
